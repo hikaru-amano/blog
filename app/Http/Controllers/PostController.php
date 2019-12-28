@@ -8,7 +8,7 @@ use App\Post as PostModel;
 
 
 class PostController extends Controller
- {
+{
      /**
       * post一覧を表示する
       * 
@@ -18,15 +18,15 @@ class PostController extends Controller
       *
      **/
    
-      
-     public function index(PostModel $post_model)
-     {
-         return view('posts/index')->with(['posts' =>$post_model->
-         get()]);
-      }
+    public function index(PostModel $post_model)
+    {
+        return view('posts/index')->with(['posts' => $post_model->get()]);
+    }
    
-     public function input()
-     {return view('posts/input');}
+    public function input()
+    {
+        return view('posts/input');
+    }
 
      
      /**
@@ -37,61 +37,66 @@ class PostController extends Controller
  */
     public function store(Request $request)
     {
-
-        $rules=[
+        $rules = [
         
-        'title'=> 'required|max:40',
-        'content'=>'required|max:4000',
+        'title' => 'required|max:40',
+        'content' => 'required|max:4000',
     ];
         
-       $messages = array(
+        $messages = array(
 		'title.required' => 'タイトルを正しく入力してください。',
 		'content.required' => '本文を正しく入力してください。',
 		);
 
-        $request->validate( $rules,$messages);
+        $request->validate($rules, $messages);
         
-        if($request->validate($rules)){
-        $post = new PostModel;
-        $post ->title=$request->input('title');
-        $post ->body =$request->input('content');
-        $post ->save();
+        if ($request->validate($rules)) {
+            $post = new PostModel;
+            $post->title = $request->input('title');
+            $post->body = $request->input('content');
+            $post->save();
         
         return Redirect('posts/create')
 			->with('success', '投稿が完了しました。');
-	}else{
-		return Redirect('posts/create')
-			->withErrors(validate($rules))
-			->withInput();
+	    } else {
+		        return Redirect('posts/create')
+		        ->withErrors(validate($rules))
+			    ->withInput();
         
+        return view('posts/create', ['status' => true]);
+        }      
         
-         return view('posts/create',['status'=>true]);
- }}
-       public function show()
-       {return view('posts.edit');}
+    }
+       
+    public function show()
+    {
+        return view('posts.edit');
+    }
         
-        public function edit($id){
-        $post=PostModel::find($id);
-            return view ('posts.edit')->with(['post' =>$post]);
-        }
+    public function edit($id)
+    {
+        $post = PostModel::find($id);
+        return view ('posts.edit')->with(['post' => $post]);
+    }
 
-        public function update(Request $request)
-        { 
-        $post=PostModel::find($request->id);
-        $post->title=$request->title;
-        $post->body=$request->content;
+    public function update(Request $request)
+    { 
+        $post = PostModel::find($request->id);
+        $post->title = $request->title;
+        $post->body = $request->content;
         $post->save();
         return Redirect('/posts')
-        ->with('success','更新されました。');
-	
-	   
-		}
+        ->with('success', '更新されました。');
+	}
         
         
-        public function delete($id)
-        {$post=PostModel::find($id);
-         $post->delete();
+    public function delete($id)
+    {
+        $post = PostModel::find($id);
+        $post->delete();
         
-         return Redirect('/posts');
-        }}
+        return Redirect('/posts');
+    }
+     
+}
          

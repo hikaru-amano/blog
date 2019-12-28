@@ -23,19 +23,21 @@
               <form action="/posts/{{$post->id}}/delete" method="POST">
                 {{csrf_field()}}
                 <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick="return deletePost(this);"></form>
-              <script>
+                <script>
                 function deletePost(e) {
                   
                 var result = window.confirm('削除しますか？');
                 console.log(result);
-                    if (result) {console.log('ai');
-                       return true;
+                    if (result) {
+                        console.log('ai');
+                        return true;
                         
-                    } else{console.log('ueo');return false;}
-                    
+                    } else {
+                        console.log('ueo');
+                        return false;}
                     }
                     
-            </script>
+                </script>
               
             @endforeach
         
