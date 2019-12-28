@@ -22,31 +22,23 @@
               <p><a href="/posts/{{$post->id}}/edit">編集</a></p>
               <form action="/posts/{{$post->id}}/delete" method="POST">
                 {{csrf_field()}}
-                <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick="deletePost(this);">
+                <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick="return deletePost(this);"></form>
               <script>
                 function deletePost(e) {
                   
                 var result = window.confirm('削除しますか？');
-                    if (result) {
-                    document.getElementById("{{$post->id}}").submit();
-                   } else{return false;}
+                console.log(result);
+                    if (result) {console.log('ai');
+                       return true;
+                        
+                    } else{console.log('ueo');return false;}
                     
                     }
                     
             </script>
-              </form>
+              
             @endforeach
-            <script>
-                function deletePost(e) {
-                  
-                var result = window.confirm('削除しますか？');
-                    if (result) {
-                    document.getElementById("{{$post->id}}").submit();
-                   } else{return false;}
-                    
-                    }
-                    
-            </script>
+        
         </div>
     </body>
 </html>
