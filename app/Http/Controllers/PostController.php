@@ -38,15 +38,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'title' => 'required|max:40',
+            'content' => 'required|max:4000',
+        ];
         
-        'title' => 'required|max:40',
-        'content' => 'required|max:4000',
-    ];
-        
-        $messages = array(
-		'title.required' => 'タイトルを正しく入力してください。',
-		'content.required' => '本文を正しく入力してください。',
-		);
+        $messages = [
+		    'title.required' => 'タイトルを正しく入力してください。',
+		    'content.required' => '本文を正しく入力してください。',
+		];
 
         $request->validate($rules, $messages);
         
@@ -55,15 +54,13 @@ class PostController extends Controller
             $post->title = $request->input('title');
             $post->body = $request->input('content');
             $post->save();
-        
-        return Redirect('posts/create')
+            return Redirect('posts/create')
 			->with('success', '投稿が完了しました。');
 	    } else {
-		        return Redirect('posts/create')
-		        ->withErrors(validate($rules))
-			    ->withInput();
-        
-        return view('posts/create', ['status' => true]);
+		    return Redirect('posts/create')
+		    ->withErrors(validate($rules))
+		    ->withInput();
+            return view('posts/create', ['status' => true]);
         }      
         
     }

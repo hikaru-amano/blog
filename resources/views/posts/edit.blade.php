@@ -6,7 +6,7 @@
 
 <body>
     <h1>編集画面</h1>
-    <form action = "{{url('/posts/update',$post->id)}}" method = "POST">
+    <form action = "{{ url('/posts/update', $post->id) }}" method = "POST">
         {{csrf_field()}}
              
     @if ($errors->any())
