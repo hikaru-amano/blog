@@ -20,7 +20,9 @@ class PostController extends Controller
    
     public function index(PostModel $post_model)
     {
-        return view('posts/index')->with(['posts' => $post_model->get()]);
+        $posts = PostModel::orderBy('id', 'DESC')->paginate(config('const.paginate'));
+        return view('posts/index')
+        ->with(['posts' => $posts]);
     }
    
     public function input()

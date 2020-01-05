@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>アプリ名 - @yield('title')</title>
+        <title>ブログ</title>
     </head>
     <body>
         @section('sidebar')
@@ -8,6 +8,7 @@
         @show
 
         <div class="container">
+            @yield('title')
             @yield('content')
         </div>
     </body>

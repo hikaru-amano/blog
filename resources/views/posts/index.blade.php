@@ -38,9 +38,8 @@
                     }
                     
                 </script>
-              
             @endforeach
-        
+            {{ $posts->links() }}
         </div>
     </body>
 </html>
