@@ -39,5 +39,5 @@
     </form>
     
     </div>
-    
+    <a href="/posts">記事一覧へ</a>
 </body>
