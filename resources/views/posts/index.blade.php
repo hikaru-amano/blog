@@ -17,7 +17,7 @@
         <div class="content">
             <div>
             @foreach ($posts as $post)
-              <h3>{{ $post->title }}</h3>
+              <h3><a href="/posts/{{ $post->id }}"</a>{{ $post->title }}</h3>
               <p>{{$post->id}}</br>{{ $post->body }} </p>
               <p><a href="/posts/{{$post->id}}/edit">編集</a></p>
               <form action="/posts/{{$post->id}}/delete" method="POST">

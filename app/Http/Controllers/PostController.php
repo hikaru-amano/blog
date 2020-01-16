@@ -67,15 +67,16 @@ class PostController extends Controller
         
     }
        
-    public function show()
+    public function show($id)
     {
-        return view('posts.edit');
+        $post = PostModel::find($id);
+        return view ('posts/show')->with(['post' => $post]);
     }
         
     public function edit($id)
     {
         $post = PostModel::find($id);
-        return view ('posts.edit')->with(['post' => $post]);
+        return view ('posts/edit')->with(['post' => $post]);
     }
 
     public function update(Request $request)
