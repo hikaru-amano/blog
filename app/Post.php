@@ -12,4 +12,10 @@ class Post extends Model
     protected $table = 'posts';
     protected $dates = ['deleted_at'];
     protected $fillable = ['title','content'];
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+    
 }
